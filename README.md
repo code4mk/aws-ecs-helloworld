@@ -1,8 +1,7 @@
 # aws-ecs-helloworld
 
-A production-quality Hello World container for **Amazon ECS**, the ECS counterpart of
-`mcr.microsoft.com/azuredocs/containerapps-helloworld`. Deploy it to verify a cluster, service,
-load balancer and health checks end to end.
+A production-quality Hello World container for **Amazon ECS**. Deploy it to verify a cluster,
+service, load balancer and health checks end to end.
 
 ![aws-ecs-helloworld home page](docs/screenshot.png)
 
@@ -46,7 +45,8 @@ open http://localhost:8080
 
 ## Deploy to ECS
 
-1. Push the image to ECR or GHCR (the included GitHub Actions workflow publishes multi-arch images to GHCR).
+1. Build and push the image to Amazon ECR (use `docker buildx build --platform linux/amd64,linux/arm64 --push`
+   for both x86 and Graviton).
 2. Create a task definition with container port `8080` and, optionally, this container health check:
    `["CMD", "python", "-m", "app.healthcheck"]`.
 3. Create a service behind an ALB with target group: protocol `HTTP`, port `8080`,
