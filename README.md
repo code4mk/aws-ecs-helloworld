@@ -4,6 +4,8 @@ A production-quality Hello World container for **Amazon ECS**, the ECS counterpa
 `mcr.microsoft.com/azuredocs/containerapps-helloworld`. Deploy it to verify a cluster, service,
 load balancer and health checks end to end.
 
+![aws-ecs-helloworld home page](docs/screenshot.png)
+
 - FastAPI + uvicorn, plain HTML home page (no JavaScript, strict CSP)
 - Detects ECS and exposes live task metadata (cluster, service, task, AZ, private IP, image) at `/api/info`
 - `/health` (liveness) and `/ready` (readiness) endpoints, plus a curl-free container health check
