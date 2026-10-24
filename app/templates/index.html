@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>$title</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23232f3e'/%3E%3Cpath d='M32 12 50 22v20L32 52 14 42V22z' fill='none' stroke='%23ff9900' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --ink: #232f3e;
+      --ink-2: #16191f;
+      --accent: #ff9900;
+      --accent-soft: #fff4e5;
+      --text: #16191f;
+      --muted: #5f6b7a;
+      --line: #e9ebed;
+      --bg: #f2f3f3;
+      --card: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: linear-gradient(135deg, var(--ink-2) 0%, var(--ink) 60%, #37475a 100%);
+      color: #fff;
+      padding: 56px 24px 112px;
+      text-align: center;
+    }
+    .logo { width: 72px; height: 72px; margin: 0 auto 20px; display: block; }
+    h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 600; margin: 0 0 8px; letter-spacing: -0.01em; }
+    .subtitle { color: #d1d5db; margin: 0 0 20px; font-size: 1.05rem; }
+    .badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 999px; font-size: 0.85rem; font-weight: 600;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #3ecf8e; box-shadow: 0 0 0 4px rgba(62,207,142,0.25); }
+    .badge.ecs { color: var(--accent); border-color: rgba(255,153,0,0.5); }
+    .badge.local { color: #d1d5db; }
+    main { width: 100%; max-width: 960px; margin: -72px auto 0; padding: 0 20px 40px; flex: 1; }
+    .card {
+      background: var(--card); border-radius: 12px; border: 1px solid var(--line);
+      box-shadow: 0 1px 2px rgba(0,28,36,0.08), 0 8px 24px rgba(0,28,36,0.08);
+      overflow: hidden; margin-bottom: 20px;
+    }
+    .card h2 {
+      margin: 0; padding: 16px 24px; font-size: 1rem; font-weight: 600;
+      border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 10px;
+    }
+    .card h2::before { content: ""; width: 4px; height: 18px; background: var(--accent); border-radius: 2px; }
+    .endpoints { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; padding: 20px 24px; }
+    .endpoint {
+      display: block; text-decoration: none; color: inherit; padding: 14px 16px;
+      border: 1px solid var(--line); border-radius: 8px; transition: border-color .15s, box-shadow .15s;
+    }
+    .endpoint:hover, .endpoint:focus-visible { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(255,153,0,0.15); outline: none; }
+    .endpoint code { font-weight: 700; color: var(--ink); }
+    .endpoint span { display: block; color: var(--muted); font-size: 0.85rem; margin-top: 2px; }
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; padding: 20px 24px 24px; }
+    .feature {
+      display: flex; flex-direction: column; gap: 6px; padding: 18px; text-decoration: none; color: inherit;
+      border: 1px solid var(--line); border-radius: 10px; transition: border-color .15s, box-shadow .15s, transform .15s;
+    }
+    .feature:hover, .feature:focus-visible {
+      border-color: var(--accent); box-shadow: 0 6px 18px rgba(0,28,36,0.10); transform: translateY(-2px); outline: none;
+    }
+    .feature svg {
+      width: 40px; height: 40px; padding: 8px; margin-bottom: 4px; border-radius: 10px;
+      background: rgba(255,153,0,0.12); fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .feature strong { font-size: 1rem; }
+    .feature span { color: var(--muted); font-size: 0.9rem; }
+    @media (prefers-reduced-motion: reduce) { .feature, .endpoint { transition: none; } .feature:hover { transform: none; } }
+    footer { text-align: center; color: var(--muted); font-size: 0.85rem; padding: 0 20px 32px; }
+    footer a { color: var(--ink); }
+    .credit { margin: 14px 0 4px; color: var(--text); }
+    .credit a { font-weight: 600; }
+    .heart { color: #e5484d; }
+    .disclaimer { margin: 0; font-size: 0.8rem; }
+    @media (prefers-color-scheme: dark) {
+      :root { --text: #e9ebed; --muted: #9ba7b6; --line: #2a3441; --bg: #0f141a; --card: #161d26; }
+      .endpoint code, footer a { color: #fff; }
+      .feature svg { background: rgba(255,153,0,0.16); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+      <rect width="64" height="64" rx="14" fill="#ffffff" fill-opacity="0.06"/>
+      <path d="M32 10 52 21.5v21L32 54 12 42.5v-21z" fill="none" stroke="#ff9900" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M12 21.5 32 33l20-11.5M32 33v21" fill="none" stroke="#ff9900" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M22 16v11.5l10 5.75M42 16v11.5" fill="none" stroke="#ffffff" stroke-opacity="0.45" stroke-width="2" stroke-linejoin="round"/>
+    </svg>
+    <h1>$message</h1>
+    <p class="subtitle">This container is up, healthy and serving traffic.</p>
+    <div class="badges">
+      <span class="badge"><span class="dot"></span>Healthy</span>
+      <span class="badge $env_class">$env_badge</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="card" aria-labelledby="next-title">
+      <h2 id="next-title">What you can do next with Amazon ECS</h2>
+      <div class="features">
+        <a class="feature" href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-auto-scaling.html" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg>
+          <strong>Scale automatically</strong>
+          <span>Add tasks when traffic grows and remove them when it drops, using Service Auto Scaling.</span>
+        </a>
+        <a class="feature" href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4"/></svg>
+          <strong>Ship without downtime</strong>
+          <span>Rolling and blue/green deployments with automatic rollback when health checks fail.</span>
+        </a>
+        <a class="feature" href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18a4 4 0 0 1-.6-8A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9z"/></svg>
+          <strong>Go serverless with Fargate</strong>
+          <span>No servers to patch or clusters to size. Pay per vCPU and GB, with Graviton for better price performance.</span>
+        </a>
+        <a class="feature" href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="5" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M7.3 11l9.4-5M7.3 13l9.4 5"/></svg>
+          <strong>Connect your services</strong>
+          <span>Service Connect gives every service a friendly name, plus retries and traffic metrics.</span>
+        </a>
+        <a class="feature" href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+          <strong>Secure by default</strong>
+          <span>Least-privilege IAM task roles, and secrets injected from Secrets Manager or Parameter Store.</span>
+        </a>
+        <a class="feature" href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContainerInsights.html" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l3-4 3 2 5-6"/></svg>
+          <strong>See everything</strong>
+          <span>Logs, metrics and traces in CloudWatch Container Insights, from cluster down to each task.</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="endpoints-title">
+      <h2 id="endpoints-title">Endpoints</h2>
+      <div class="endpoints">
+        <a class="endpoint" href="/health"><code>/health</code><span>Liveness check</span></a>
+        <a class="endpoint" href="/ready"><code>/ready</code><span>Readiness check</span></a>
+        <a class="endpoint" href="/api/info"><code>/api/info</code><span>Runtime details as JSON</span></a>
+        <a class="endpoint" href="/docs"><code>/docs</code><span>OpenAPI documentation</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Refresh the page to see load balancing across tasks. &middot;
+    <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html" rel="noopener noreferrer">Amazon ECS documentation</a>
+    <p class="credit">
+      Crafted with <span class="heart" aria-label="love">&hearts;</span> by
+      <a href="https://github.com/code4mk" rel="noopener noreferrer">code4mk</a>
+      to help you ship on Amazon ECS with confidence. Questions or ideas?
+      <a href="mailto:hiremostafa@gmail.com">hiremostafa@gmail.com</a>
+    </p>
+    <p class="disclaimer">Sample application. Not affiliated with or endorsed by Amazon Web Services.</p>
+  </footer>
+</body>
+</html>

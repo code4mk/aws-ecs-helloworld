@@ -1,0 +1,18 @@
+[project]
+name = "aws-ecs-helloworld"
+version = "1.0.0"
+description = "Hello World sample container for Amazon ECS (FastAPI)."
+requires-python = ">=3.12"
+license = "MIT"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM"]
